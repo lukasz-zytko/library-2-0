@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Status wypożyczeń</h1>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Książka</th>
+        <th scope="col">Status</th>
+        <th scope="col">Data</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for result in results %}
+      <tr>
+        <td>{{ result[0] }}</td>
+        <td>{{ result[1] }}</td>
+        <td>{{ result[2] }}</td>
+        <td>{{ result[3] }}</td>
+      </tr>
+    {% endfor %}
+    <form method="POST" action="/borrow">
+      <tr>
+        {{ form.hidden_tag() }}
+        <td>#</th>
+        <td>* {{ form.book_id }}</td>
+        <td>* {{ form.status }}</td>
+        <td>* {{ form.date }}</td>
+        <td><button type="submit" class="btn btn-success btn-sm">Add</button></td>
+      </tr>
+    </form>
+    </tbody>
+</table>
+
+{% endblock %}
