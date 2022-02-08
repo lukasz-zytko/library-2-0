@@ -7,7 +7,7 @@ metadata = MetaData()
 
 
 class SQLite:
-    def __init__(self) -> None:
+    def __init__(self):
         self.conn = None
         try:          
             self.conn = engine.connect()
@@ -15,8 +15,8 @@ class SQLite:
             print(e)
 
     def get_table(self,table_name):
+        self.conn = engine.connect() 
         self.table_name = table_name
-        self.conn = engine.connect()    
         table = Table(self.table_name, metadata, autoload=True, autoload_with=engine)
         with self.conn as conn:
             result = conn.execute(table.select()).fetchall()
